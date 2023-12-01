@@ -18,16 +18,25 @@ typedef struct{
 	uint32_t	TaskID;
 }sTasks;
 
-#define SCH_MAX_TASKS	40
+#define SCH_MAX_TASKS 40
+#define ERROR_SCH_TOO_MANY_TASKS 		0
+#define ERROR_SCH_CANNOT_DELETE_TASK	1
+#define RETURN_ERROR					2
+#define RETURN_NORMAL					3
 
 void SCH_Init(void);
 
-void SCH_Add_Task( 	void (*pFunction)(),
+unsigned char SCH_Add_Task( 	void (*pFunction)(),
 					uint32_t DELAY,
 					uint32_t PERIOD);
 void SCH_Update(void);
 
 void SCH_Dispatch_Tasks(void);
 
-void SCH_Delete(uint32_t ID);
+unsigned char SCH_Delete_Task(uint32_t ID);
+void SCH_Report_Status(void);
+void Watchdog();
+// my extra functions
+void find_min_task(void);
+void update_other_tasks(void);
 #endif /* INC_SCHEDULER_H_ */
